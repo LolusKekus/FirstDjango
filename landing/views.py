@@ -3,7 +3,7 @@ import datetime
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
-from products.models import ProductImage, Product
+from products.models import ProductImage, Product, ProductCategory
 from .forms import SubscribersForm
 
 
@@ -43,6 +43,22 @@ class Notebook(ListView):
 
     def get_queryset(self):
         return super(Notebook, self).get_queryset().filter(category_id=2)
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'landing/products_list.html'
+
+    def get_queryset(self):
+        return super(ProductListView, self).get_queryset().\
+            filter(category_id=self.kwargs.get("category_id"))
+
+    def get_context_data(self, **kwargs):
+        ctx = super(ProductListView, self).get_context_data(**kwargs)
+        ctx.update({
+            "category": ProductCategory.objects.get(id=self.kwargs.get("category_id"))
+        })
+        return ctx
 
 
 class ProductDetail(DetailView):

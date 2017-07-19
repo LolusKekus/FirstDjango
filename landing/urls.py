@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^landing/$', views.landing, name='landing'),
     url(r'^phone/$', views.Phone.as_view(), name='phone'),
     url(r'^notebook/$', views.Notebook.as_view(), name='notebook'),
+    url(r'^categoryes/(?P<category_id>\d+)/$', views.ProductListView.as_view(),
+        name='categoryes'),
     url(r'^detail/(?P<pk>\d+)/$', views.ProductDetail.as_view(), name='detail'),
 ]

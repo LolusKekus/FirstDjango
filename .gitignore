@@ -1,3 +1,5 @@
 ./.idea/*
 ./landing/migrations/*
 *.pyc
+data.json
+.idea*

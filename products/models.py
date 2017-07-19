@@ -8,7 +8,11 @@ class ProductCategory(models.Model):
     is_active = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return u"%s" % self.name
+        return self.name
+
+    @property
+    def name_plural(self):
+        return u"%sов" % self.__unicode__().lower()
 
     class Meta:
         verbose_name = u'Категория товара'
